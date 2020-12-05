@@ -31,8 +31,12 @@ public class TestController {
     // }
 
     @PostMapping
-    public ResponseEntity<String> setAnimation(@RequestBody @Valid SearchDto parms) {
+    public void setAnimation(@RequestBody @Valid SearchDto parms, BindingResult bindingResult)
+            throws CustomInvalidParameterException {
         System.out.println(parms.toString());
-        return ResponseEntity.ok("잘된다.");
+        if (bindingResult.hasErrors()) {
+            BindingResultHelper.throwCustomInvalidParameterException(bindingResult);
+        }
+        // return ResponseEntity.ok("잘된다.");
     }
 }
