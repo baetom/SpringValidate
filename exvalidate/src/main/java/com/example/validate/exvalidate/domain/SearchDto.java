@@ -6,15 +6,15 @@ import javax.validation.constraints.NotNull;
 
 import com.example.validate.exvalidate.validation.LimitSearchPeriod;
 import com.example.validate.exvalidate.validation.ValidPeriod;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@LimitSearchPeriod(message = "조회 기간은 90일 이내여야 합니다.")
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
+@LimitSearchPeriod
 public class SearchDto implements ValidPeriod {
 
     @NotNull(message = "keyword가 명시되어야 합니다.")
@@ -28,14 +28,14 @@ public class SearchDto implements ValidPeriod {
     @DateTimeFormat(pattern = "yyyyMMdd")
     private LocalDate endDate;
 
-    public SearchDto() {
-    }
+    // public SearchDto() {
+    // }
 
-    public SearchDto(String keyword, LocalDate startDate, LocalDate endDate) {
-        this.keyword = keyword;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+    // public SearchDto(String keyword, LocalDate startDate, LocalDate endDate) {
+    // this.keyword = keyword;
+    // this.startDate = startDate;
+    // this.endDate = endDate;
+    // }
 
     // 여기!!!
     @Override
